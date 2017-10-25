@@ -1,0 +1,46 @@
+<html>
+	<head>
+		<title>Zombie</title>
+	<style>
+	#zombie_map {
+    		height: 100%;
+    		width: 100%;
+    		left: 0;
+    		position: absolute;
+    		top: 0;  
+    		background-color: grey;
+	}
+	</style>
+	</head>
+	<body>
+  		<script async defer
+    		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMjxhhAlMXNt3Dpb9WILeYHj5m-0LysNs&callback=initMap">
+  		</script>
+		My zombie map
+		<div id="zombie_map"></div>
+		<script>
+    		function initMap() {
+
+            		zombie_map = new google.maps.Map(document.getElementById('zombie_map'), {
+            		zoom: 10,
+            		center: {lat: 66.500048, lng: 25.734913}
+        		});
+			if(navigator.geolocation) {
+			navigator.geolocation.watchPosition(set_my_position);
+			}
+			else {
+			alert("Geolocation doesn't work in your browser");
+			}
+			
+    		}
+			function set_my_position(position){
+			var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			var player_position = new google.maps.Marker({
+			position: {lat: position.coords.latitude, lng: position.coords.longitude },
+			map: zombie_map
+			});
+			
+		}
+		</script>
+	</body>
+</html>
